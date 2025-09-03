@@ -1,189 +1,91 @@
-# 🏠 Ritesh's House Price Predictor – Advanced ML Project
+# 🏠 Indian House Price Predictor
 
-Welcome to **Ritesh's House Price Predictor**! This is a comprehensive, end-to-end machine learning project for intelligent house price prediction based on various property features.
-
-This project showcases modern ML practices from raw data processing to deployment, featuring data preprocessing, feature engineering, experimentation, and model development with a professional web interface.
-
-**Created by: Ritesh**
+Welcome to the **Indian House Price Predictor**! This is a user-friendly web application built with Streamlit that predicts property prices based on user inputs like city, area, property type, and amenities.
 
 ---
 
-## 📦 Project Structure
+## 📖 Project Overview
+
+This app allows users to:
+- Predict property prices in major Indian cities.
+- Input property details such as area, property type, and amenities.
+- View interactive visualizations for better insights.
+
+The app uses **rule-based logic** for predictions and is designed to be modular, making it easy to upgrade to a machine learning model in the future.
+
+---
+
+## 📂 Project Structure
 
 ```
 house-price-predictor/
-├── configs/                # YAML-based configuration for models
-├── data/                   # Raw and processed datasets
-├── deployment/
-│   └── mlflow/             # Docker Compose setup for MLflow
-├── models/                 # Trained models and preprocessors
-├── notebooks/              # Optional Jupyter notebooks for experimentation
-├── src/
-│   ├── data/               # Data cleaning and preprocessing scripts
-│   ├── features/           # Feature engineering pipeline
-│   ├── models/             # Model training and evaluation
-├── requirements.txt        # Python dependencies
-└── README.md               # You’re here!
+├── streamlit_app/          # Streamlit app code
+│   ├── app.py              # Main app script
+│   ├── README.md           # App-specific README
+│   └── requirements.txt    # Dependencies for the app
+├── data/                   # Data folder (optional for demo/sample data)
+├── HOW_TO_RUN.md           # Instructions to run the app
+└── README.md               # You're here!
 ```
 
 ---
 
-## 🛠️ Setting up Learning/Development Environment
+## 🚀 How to Run the App
 
-To begin, ensure the following tools are installed on your system:
-
-- [Python 3.11](https://www.python.org/downloads/)
-
-- [Visual Studio Code](https://code.visualstudio.com/) or your preferred editor
-- UV – Python package and environment manager (https://astral.sh/uv)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) **or** [Podman Desktop](https://podman-desktop.io/)
-
----
-
-## 🚀 Preparing Your Environment
-
-
-
-2. **Navigate to the project directory:**
-
+1. **Clone the repository**:
    ```bash
-   cd house-price-predictor
+   git clone https://github.com/YOUR-USERNAME/Indian-House-Price-Predictor.git
+   cd Indian-House-Price-Predictor
    ```
 
-3. **Setup Python Virtual Environment using UV:**
-
+2. **Navigate to the Streamlit app directory**:
    ```bash
-   uv venv --python python3.11
-   source .venv/bin/activate
+   cd streamlit_app
    ```
 
-4. **Install dependencies:**
-
+3. **Install dependencies**:
    ```bash
-   uv pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 
----
+4. **Run the app**:
+   ```bash
+   streamlit run app.py
+   ```
 
-## 📊 Setup MLflow for Experiment Tracking
-
-To track experiments and model runs:
-
-```bash
-cd deployment/mlflow
-docker compose -f mlflow-docker-compose.yml up -d
-docker compose ps
-```
-
-> 🐧 **Using Podman?** Use this instead:
-
-```bash
-podman compose -f mlflow-docker-compose.yml up -d
-podman compose ps
-```
-
-Access the MLflow UI at [http://localhost:5555](http://localhost:5555)
+5. **Access the app**:
+   Open your browser and go to [http://localhost:8501](http://localhost:8501).
 
 ---
 
-## 📒 Using JupyterLab (Optional)
+## 🛠️ Features
 
-If you prefer an interactive experience, launch JupyterLab with:
-
-```bash
-uv python -m jupyterlab
-# or
-python -m jupyterlab
-```
+- **Real-time predictions**: Get instant property price estimates.
+- **Interactive UI**: Simple and intuitive interface for all users.
+- **Customizable logic**: Rule-based system ready for ML upgrades.
+- **Visualizations**: Charts to help users understand price trends.
 
 ---
 
-## 🔁 Model Workflow
+## 🔮 Future Enhancements
 
-### 🧹 Step 1: Data Processing
-
-Clean and preprocess the raw housing dataset:
-
-```bash
-python src/data/run_processing.py   --input data/raw/house_data.csv   --output data/processed/cleaned_house_data.csv
-```
-
----
-
-### 🧠 Step 2: Feature Engineering
-
-Apply transformations and generate features:
-
-```bash
-python src/features/engineer.py   --input data/processed/cleaned_house_data.csv   --output data/processed/featured_house_data.csv   --preprocessor models/trained/preprocessor.pkl
-```
-
----
-
-### 📈 Step 3: Modeling & Experimentation
-
-Train your model and log everything to MLflow:
-
-```bash
-python src/models/train_model.py   --config configs/model_config.yaml   --data data/processed/featured_house_data.csv   --models-dir models   --mlflow-tracking-uri http://localhost:5555
-```
-
----
-
-
-## Building FastAPI and Streamlit 
-
-The code for both the apps are available in `src/api` and `streamlit_app` already. To build and launch these apps 
-
-  * Add a  `Dockerfile` in the root of the source code for building FastAPI  
-  * Add `streamlit_app/Dockerfile` to package and build the Streamlit app  
-  * Add `docker-compose.yaml` in the root path to launch both these apps. be sure to provide `API_URL=http://fastapi:8000` in the streamlit app's environment. 
-
-
-Once you have launched both the apps, you should be able to access streamlit web ui and make predictions. 
-
-You could also test predictions with FastAPI directly using 
-
-```
-curl -X POST "http://localhost:8000/predict" \
--H "Content-Type: application/json" \
--d '{
-  "sqft": 1500,
-  "bedrooms": 3,
-  "bathrooms": 2,
-  "location": "suburban",
-  "year_built": 2000,
-  "condition": fair
-}'
-
-```
-
-Be sure to replace `http://localhost:8000/predict` with actual endpoint based on where its running. 
-
-
-## 🚀 Key Features
-
-This project demonstrates:
-
-- **Complete ML pipeline** from data preprocessing to deployment
-- **Interactive web interface** for real-time predictions  
-- **Modern machine learning practices** and clean code architecture
-- **Scalable design** ready for production deployment
-- **Professional UI/UX** with responsive design
+- Integrate a machine learning model for more accurate predictions.
+- Add support for more cities and property types.
+- Include historical price trends and maps.
 
 ---
 
 ## 🤝 Contributing
 
-Feel free to contribute, enhance, and make this project even better! All improvements are welcome.
+Contributions are welcome! Feel free to fork the repository, create a new branch, and submit a pull request.
 
 ---
 
 ## 📧 Contact
 
-For questions or collaboration opportunities, feel free to reach out!
+For questions or collaboration opportunities, feel free to reach out at **your-email@example.com**.
 
 ---
 
-**Happy Coding!**  
+**Happy Predicting!**  
 — **Ritesh** 🚀
