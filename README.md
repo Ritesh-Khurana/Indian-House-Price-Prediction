@@ -83,7 +83,7 @@ Contributions are welcome! Feel free to fork the repository, create a new branch
 
 ## 📧 Contact
 
-For questions or collaboration opportunities, feel free to reach out at **your-email@example.com**.
+For questions or collaboration opportunities, feel free to reach out at **riteshkhurana97@example.com**.
 
 ---
 
