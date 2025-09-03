@@ -1,0 +1,12 @@
+# Core Streamlit framework
+streamlit>=1.24.0
+
+# Data manipulation and analysis
+pandas>=1.5.0
+numpy>=1.24.0
+
+# Interactive plotting and visualization
+plotly>=5.15.0
+
+# Additional utilities
+requests>=2.28.0
